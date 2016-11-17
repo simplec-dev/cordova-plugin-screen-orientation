@@ -17,7 +17,7 @@
 -->
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-screen-orientation"
+    id="com.simplec.plugins.screenorientation"
     version="1.4.2">
 
     <name>Screen Orientation</name>
