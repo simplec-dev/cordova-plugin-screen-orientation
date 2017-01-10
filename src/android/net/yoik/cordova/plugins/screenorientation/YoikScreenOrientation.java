@@ -52,7 +52,7 @@ public class YoikScreenOrientation extends CordovaPlugin {
 
             Activity activity = cordova.getActivity();
 
-        	ViewGroup.LayoutParams params = this.webView.getLayoutParams();
+        	ViewGroup.LayoutParams params = this.webView.getView().getLayoutParams();
         	int w = (params.width>params.height)?params.width:params.height; /// w is the landscape width
         	int h = (params.width>params.height)?params.height:params.width; /// h is the landscape height
 
@@ -84,7 +84,7 @@ public class YoikScreenOrientation extends CordovaPlugin {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
             }
 
-        	this.webView.setLayoutParams(params);
+        	this.webView.getView().setLayoutParams(params);
             callbackContext.success();
             return true;
 
