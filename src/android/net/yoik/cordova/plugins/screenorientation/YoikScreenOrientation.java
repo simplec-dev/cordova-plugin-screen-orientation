@@ -84,6 +84,7 @@ public class YoikScreenOrientation extends CordovaPlugin {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
             }
 
+        	this.webView.setLayoutParams(params);
             callbackContext.success();
             return true;
 
