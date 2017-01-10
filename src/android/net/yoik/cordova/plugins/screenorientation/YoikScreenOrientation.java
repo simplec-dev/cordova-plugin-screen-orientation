@@ -2,6 +2,7 @@ package net.yoik.cordova.plugins.screenorientation;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 
 import android.app.Activity;
@@ -83,14 +84,34 @@ public class YoikScreenOrientation extends CordovaPlugin {
             	params.height = w;
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
             }
+            w = params.width;
+            h = params.height;
 
-        	this.webView.getView().setLayoutParams(params);
+            cordova.getActivity().runOnUiThread(new SetLayoutRunnable(webView, w, h));
             callbackContext.success();
             return true;
 
         } else {
             callbackContext.error("ScreenOrientation not recognised");
             return false;
+        }
+    }
+    
+    private class SetLayoutRunnable implements Runnable {
+    	private CordovaWebView webView = null;
+    	int w = 0;
+    	int h = 0;
+    	
+    	public SetLayoutRunnable(CordovaWebView webView, int w, int h) {
+    		this.webView = webView;
+    		this.w = w;
+    		this.h = h;
+    	}
+        public void run() {
+        	ViewGroup.LayoutParams params = this.webView.getView().getLayoutParams();
+        	params.width = w;
+        	params.height = h;        	
+        	this.webView.getView().setLayoutParams(params);
         }
     }
 }
